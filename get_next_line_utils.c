@@ -6,17 +6,18 @@
 /*   By: aahaded <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:35:49 by aahaded           #+#    #+#             */
-/*   Updated: 2024/11/12 17:14:40 by aahaded          ###   ########.fr       */
+/*   Updated: 2024/11/12 18:16:55 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "get_next_line.h"
 
-char *ft_strlcpy(char *dest, char *src, int len)
+char	*ft_strlcpy(char *dest, char *src, int len)
 {
     int i;
 
     i = 0;
+	if (!dest && !src)
+		return (NULL);
     while (src[i] && i < len)
     {
         dest[i] = src[i];
@@ -25,15 +26,15 @@ char *ft_strlcpy(char *dest, char *src, int len)
     return (dest);
 }
 
-char *ft_strdup(char *str)
+char	*ft_strdup(char *str)
 {
     int     i;
-    int     len_str;
     char    *res;
 
     i = 0;
-    len_str = ft_strlen(str);
-    res = malloc(len_str + 1);
+	if (!str)
+		return (NULL);
+    res = malloc(ft_strlen(str) + 1);
     if (!res)
         return (NULL);
     while (str[i])
@@ -45,7 +46,7 @@ char *ft_strdup(char *str)
     return (res);
 }
 
-char *ft_lkmala(char **str)
+char	*ft_lkmala(char **str)
 {
     int     i;
     char    *line;
@@ -54,22 +55,18 @@ char *ft_lkmala(char **str)
     i = 0;
     if (!*str)
         return (NULL);
-
     while ((*str)[i] && (*str)[i] != '\n')
         i++;
-
     line = malloc(i + 2);
     if (!line)
         return (NULL);
-
     ft_strlcpy(line, *str, i + 1);
     if ((*str)[i] == '\n')
-    {
+	{
         line[i] = '\n';
-        i++;
-    }
+		i++;
+	}
     line[i] = '\0';
-
     if ((*str)[i])
     {
         temp = ft_strdup(&((*str)[i]));
@@ -77,10 +74,9 @@ char *ft_lkmala(char **str)
         *str = temp;
     }
     else
-    {
-        free(*str);
+	{
+		free(*str);
         *str = NULL;
-    }
-
+	}
     return (line);
 }
