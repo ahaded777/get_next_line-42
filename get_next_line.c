@@ -2,12 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: aahaded <marvin@42.fr>                     +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
+/*                                                    +:+ +:+
+    +:+     */
+/*   By: aahaded <marvin@42.fr>                     +#+  +:+
+    +#+        */
+/*                                                +#+#+#+#+#+
+    +#+           */
 /*   Created: 2024/11/12 13:34:09 by aahaded           #+#    #+#             */
 /*   Updated: 2024/11/12 18:37:17 by aahaded          ###   ########.fr       */
 /*                                                                            */
@@ -15,7 +15,7 @@
 #include "get_next_line.h"
 
 
-int	ft_strlen(const char *str)
+int ft_strlen(const char *str)
 {
 	int i;
 
@@ -45,47 +45,47 @@ char	*ft_strchar(char *str, char c)
 	return (0);
 }
 
-static void ft_lkmala_strjoin(char *res, char *str, int *len)
+static void	ft_lkmala_strjoin(char *res, char *str, int *len)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (str[i])
-    {
-        res[*len] = str[i];
-        i++;
-        (*len)++;
-    }
+	i = 0;
+	while (str[i])
+	{
+		res[*len] = str[i];
+		i++;
+		(*len)++;
+	}
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-    int len;
-    char *res;
+	int     len;
+	char    *res;
 
-    if (!s1 && !s2)
-        return (NULL);
-    if (!s1)
-        s1 = "";
-    if (!s2)
-        s2 = "";
-    res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-    if (!res)
-        return (NULL);
-    len = 0;
-    ft_lkmala_strjoin(res, s1, &len);
-    ft_lkmala_strjoin(res, s2, &len);
-    res[len] = '\0';
-    return (res);
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		s1 = "";
+	if (!s2)
+		s2 = "";
+	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!res)
+		return (NULL);
+	len = 0;
+	ft_lkmala_strjoin(res, s1, &len);
+	ft_lkmala_strjoin(res, s2, &len);
+	res[len] = '\0';
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
 	static char *saved;
-	char *line;
-	char *temp;
-	char buffer[BUFFER_SIZE + 1];
-	int bytes_read;
+	char        *line;
+	char        *temp;
+	char        buffer[BUFFER_SIZE + 1];
+	int         bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -93,12 +93,8 @@ char	*get_next_line(int fd)
 	while (!ft_strchar(saved, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read < 0)
-		{
-			free(saved);
-			saved = NULL;
+		if (ft_lkmala_machakil_ti9niya(bytes_read, saved) == 0)
 			return (NULL);
-		}
 		if (bytes_read == 0)
 			break ;
 		buffer[bytes_read] = '\0';
@@ -112,18 +108,18 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
-{
-	int fd = open("test.txt", O_RDONLY);
+// int	main(void)
+// {
+// 	int fd = open("test.txt", O_RDONLY);
 
-	char *line;
+// 	char *line;
 
-	line = get_next_line(fd);
-    printf("%s", line);
-	line = get_next_line(fd);
-    printf("%s", line);
-	line = get_next_line(fd);
-    printf("%s", line);
-	line = get_next_line(fd);
-    printf("%s", line);
-}
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// }
