@@ -90,6 +90,7 @@ char	*ft_lkmala(char **str)
 		return (NULL);
 	while ((*str)[i] && (*str)[i] != '\n')
 		i++;
+	temp = NULL;
 	line = malloc(i + 2);
 	if (!line)
 		return (NULL);
