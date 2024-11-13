@@ -29,9 +29,9 @@
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_lkmala(char **str);
-int     ft_strlen(const char *str);
+int		ft_strlen(const char *str);
 char	*ft_strchar(char *str, char c);
 char	*ft_strlcpy(char *dest, char *src, int len);
-int     ft_lkmala_machakil_ti9niya(int bytes_read, char *saved);
+int		ft_lkmala_machakil_ti9niya(int bytes_read, char *saved);
 
 #endif

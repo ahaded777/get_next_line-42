@@ -14,10 +14,9 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-
-int ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -29,7 +28,7 @@ int ft_strlen(const char *str)
 
 char	*ft_strchar(char *str, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -47,7 +46,7 @@ char	*ft_strchar(char *str, char c)
 
 static void	ft_lkmala_strjoin(char *res, char *str, int *len)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -60,8 +59,8 @@ static void	ft_lkmala_strjoin(char *res, char *str, int *len)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int     len;
-	char    *res;
+	int		len;
+	char	*res;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -81,11 +80,11 @@ char	*ft_strjoin(char *s1, char *s2)
 
 char	*get_next_line(int fd)
 {
-	static char *saved;
-	char        *line;
-	char        *temp;
-	char        buffer[BUFFER_SIZE + 1];
-	int         bytes_read;
+	static char	*saved;
+	char		*line;
+	char		*temp;
+	char		buffer[BUFFER_SIZE + 1];
+	int			bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

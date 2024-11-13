@@ -31,7 +31,7 @@ int	ft_lkmala_machakil_ti9niya(int bytes_read, char *saved)
 
 char	*ft_strlcpy(char *dest, char *src, int len)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!dest && !src)
@@ -46,8 +46,8 @@ char	*ft_strlcpy(char *dest, char *src, int len)
 
 char	*ft_strdup(char *str)
 {
-	int     i;
-	char    *res;
+	int		i;
+	char	*res;
 
 	i = 0;
 	if (!str)
@@ -81,9 +81,9 @@ void	ft_lkmala_lkmala(char **str, int i, char *temp)
 
 char	*ft_lkmala(char **str)
 {
-	int     i;
-	char    *line;
-	char    *temp;
+	int		i;
+	char	*line;
+	char	*temp;
 
 	i = 0;
 	if (!*str)
