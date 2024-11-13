@@ -90,7 +90,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	bytes_read = 1;
-	while (!ft_strchar(saved, '\n'))
+	while (!saved || !ft_strchar(saved, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (ft_lkmala_machakil_ti9niya(bytes_read, saved) == 0)
