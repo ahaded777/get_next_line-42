@@ -66,41 +66,40 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
-static int	ft_lkmala_machakil_ti9niya(int bytes_read, char **saved)
+static char	*ft_read_to_saved(int fd, char *saved)
 {
-	if (bytes_read < 0)
-	{
-		free(*saved);
-		*saved = NULL;
-		return (0);
-	}
-	return (1);
-}
+	char	*buffer;
+	char	*temp;
+	int		bytes_read;
 
-char	*get_next_line(int fd)
-{
-	static char	*saved;
-	char		*temp;
-	char		buffer[BUFFER_SIZE + 1];
-	int			bytes_read;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	bytes_read = 1;
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (free(saved), NULL);
 	while (!ft_strchar(saved, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (ft_lkmala_machakil_ti9niya(bytes_read, &saved) == 0)
-			return (NULL);
+		if (bytes_read < 0)
+			return (free(buffer), free(saved), NULL);
 		if (bytes_read == 0)
 			break ;
 		buffer[bytes_read] = '\0';
 		temp = ft_strjoin(saved, buffer);
 		if (!temp)
-			return (free(saved), saved = NULL, NULL);
+			return (free(buffer), free(saved), NULL);
 		free(saved);
 		saved = temp;
 	}
+	free(buffer);
+	return (saved);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*saved;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (free(saved), NULL);
+	saved = ft_read_to_saved(fd, saved);
 	if (!saved)
 		return (NULL);
 	return (ft_lkmala(&saved));
@@ -109,9 +108,7 @@ char	*get_next_line(int fd)
 // int	main(void)
 // {
 // 	int fd = open("test.txt", O_RDONLY);
-
 // 	char *line;
-
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
 // 	line = get_next_line(fd);

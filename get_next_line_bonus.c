@@ -63,41 +63,40 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
-static int	ft_lkmala_machakil_ti9niya(int bytes_read, char **saved)
+static char	*ft_read_to_saved(int fd, char *saved)
 {
-	if (bytes_read < 0)
+	char	*buffer;
+	char	*temp;
+	int		bytes_read;
+
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (free(saved), NULL);
+	while (!ft_strchar(saved, '\n'))
 	{
-		free(*saved);
-		*saved = NULL;
-		return (0);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (free(buffer), free(saved), NULL);
+		if (bytes_read == 0)
+			break ;
+		buffer[bytes_read] = '\0';
+		temp = ft_strjoin(saved, buffer);
+		if (!temp)
+			return (free(buffer), free(saved), NULL);
+		free(saved);
+		saved = temp;
 	}
-	return (1);
+	free(buffer);
+	return (saved);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*saved[1024] = {NULL};
-	char		*temp;
-	char		buffer[BUFFER_SIZE + 1];
-	int			bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	bytes_read = 1;
-	while (!ft_strchar(saved[fd], '\n'))
-	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (ft_lkmala_machakil_ti9niya(bytes_read, &saved[fd]) == 0)
-			return (NULL);
-		if (bytes_read == 0)
-			break ;
-		buffer[bytes_read] = '\0';
-		temp = ft_strjoin(saved[fd], buffer);
-		if (!temp)
-			return (free(saved[fd]), saved[fd] = NULL, NULL);
-		free(saved[fd]);
-		saved[fd] = temp;
-	}
+		return (free(saved[fd]), NULL);
+	saved[fd] = ft_read_to_saved(fd, saved[fd]);
 	if (!saved[fd])
 		return (NULL);
 	return (ft_lkmala(&saved[fd]));
