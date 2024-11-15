@@ -16,12 +16,12 @@
 
 // lkmala
 
-int	ft_lkmala_machakil_ti9niya(int bytes_read, char *saved)
+int	ft_lkmala_machakil_ti9niya(int bytes_read, char **saved)
 {
 	if (bytes_read < 0)
 	{
-		free(saved);
-		saved = NULL;
+		free(*saved);
+		*saved = NULL;
 		return (0);
 	}
 	return (1);
@@ -34,13 +34,14 @@ char	*ft_strlcpy(char *dest, char *src, int len)
 	int	i;
 
 	i = 0;
-	if (!dest && !src)
+	if (!dest || !src)
 		return (NULL);
-	while (src[i] && i < len)
+	while (src[i] && i < len - 1)
 	{
 		dest[i] = src[i];
 		i++;
 	}
+	dest[i] = '\0';
 	return (dest);
 }
 
@@ -66,9 +67,17 @@ char	*ft_strdup(char *str)
 
 void	ft_lkmala_lkmala(char **str, int i, char *temp)
 {
+	if (!str || !*str)
+		return ;
 	if ((*str)[i])
 	{
 		temp = ft_strdup(&((*str)[i]));
+		if (!temp)
+		{
+			free(*str);
+			*str = NULL;
+			return ;
+		}
 		free(*str);
 		*str = temp;
 	}
@@ -90,17 +99,13 @@ char	*ft_lkmala(char **str)
 		return (NULL);
 	while ((*str)[i] && (*str)[i] != '\n')
 		i++;
-	temp = NULL;
-	line = malloc(i + 2);
+	if ((*str)[i] == '\n')
+		i++;
+	line = malloc(i + 1);
 	if (!line)
 		return (NULL);
 	ft_strlcpy(line, *str, i + 1);
-	if ((*str)[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
-	line[i] = '\0';
+	temp = NULL;
 	ft_lkmala_lkmala(&(*str), i, temp);
 	return (line);
 }

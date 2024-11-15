@@ -61,13 +61,15 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	int		len;
 	char	*res;
+	char	*empty;
 
+	empty = "";
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		s1 = "";
+		s1 = empty;
 	if (!s2)
-		s2 = "";
+		s2 = empty;
 	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!res)
 		return (NULL);
@@ -92,7 +94,7 @@ char	*get_next_line(int fd)
 	while (!saved || !ft_strchar(saved, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (ft_lkmala_machakil_ti9niya(bytes_read, saved) == 0)
+		if (ft_lkmala_machakil_ti9niya(bytes_read, &saved) == 0)
 			return (NULL);
 		if (bytes_read == 0)
 			break ;

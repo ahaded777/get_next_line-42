@@ -32,6 +32,7 @@ char	*ft_lkmala(char **str);
 int		ft_strlen(const char *str);
 char	*ft_strchar(char *str, char c);
 char	*ft_strlcpy(char *dest, char *src, int len);
-int		ft_lkmala_machakil_ti9niya(int bytes_read, char *saved);
+char	*ft_strdup(char *str);
+int		ft_lkmala_machakil_ti9niya(int bytes_read, char **saved);
 
 #endif
