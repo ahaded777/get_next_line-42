@@ -14,20 +14,17 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-// lkmala
-
-int	ft_lkmala_machakil_ti9niya(int bytes_read, char **saved)
+int	ft_strlen(const char *str)
 {
-	if (bytes_read < 0)
-	{
-		free(*saved);
-		*saved = NULL;
-		return (0);
-	}
-	return (1);
-}
+	int	i;
 
-///
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i])
+		i++;
+	return (i);
+}
 
 char	*ft_strlcpy(char *dest, char *src, int len)
 {
@@ -103,7 +100,11 @@ char	*ft_lkmala(char **str)
 		i++;
 	line = malloc(i + 1);
 	if (!line)
+	{
+		free(*str);
+		*str = NULL;
 		return (NULL);
+	}
 	ft_strlcpy(line, *str, i + 1);
 	temp = NULL;
 	ft_lkmala_lkmala(&(*str), i, temp);

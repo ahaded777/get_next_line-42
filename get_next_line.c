@@ -14,18 +14,6 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (-1);
-	while (str[i])
-		i++;
-	return (i);
-}
-
 char	*ft_strchar(char *str, char c)
 {
 	int	i;
@@ -61,15 +49,13 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	int		len;
 	char	*res;
-	char	*empty;
 
-	empty = "";
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		s1 = empty;
+		s1 = "";
 	if (!s2)
-		s2 = empty;
+		s2 = "";
 	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!res)
 		return (NULL);
@@ -80,10 +66,20 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
+static int	ft_lkmala_machakil_ti9niya(int bytes_read, char **saved)
+{
+	if (bytes_read < 0)
+	{
+		free(*saved);
+		*saved = NULL;
+		return (0);
+	}
+	return (1);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*saved;
-	char		*line;
 	char		*temp;
 	char		buffer[BUFFER_SIZE + 1];
 	int			bytes_read;
@@ -91,7 +87,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	bytes_read = 1;
-	while (!saved || !ft_strchar(saved, '\n'))
+	while (!ft_strchar(saved, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (ft_lkmala_machakil_ti9niya(bytes_read, &saved) == 0)
@@ -100,13 +96,14 @@ char	*get_next_line(int fd)
 			break ;
 		buffer[bytes_read] = '\0';
 		temp = ft_strjoin(saved, buffer);
+		if (!temp)
+			return (free(saved), saved = NULL, NULL);
 		free(saved);
 		saved = temp;
 	}
 	if (!saved)
 		return (NULL);
-	line = ft_lkmala(&saved);
-	return (line);
+	return (ft_lkmala(&saved));
 }
 
 // int	main(void)
