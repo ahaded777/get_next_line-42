@@ -1,12 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aahaded <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 10:47:50 by aahaded           #+#    #+#             */
-/*   Updated: 2024/11/15 10:48:57 by aahaded          ###   ########.fr       */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: aahaded <marvin@42.fr>                     +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2024/11/12 13:35:49 by aahaded           #+#    #+#             */
+/*   Updated: 2024/11/12 18:16:55 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
@@ -23,7 +26,7 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strlcpy(char *dest, char *src, int len)
+static char	*ft_strlcpy(char *dest, char *src, int len)
 {
 	int	i;
 
@@ -39,7 +42,7 @@ char	*ft_strlcpy(char *dest, char *src, int len)
 	return (dest);
 }
 
-char	*ft_strdup(char *str)
+static char	*ft_strdup(char *str)
 {
 	int		i;
 	char	*res;
@@ -59,10 +62,11 @@ char	*ft_strdup(char *str)
 	return (res);
 }
 
-void	ft_lkmala_lkmala(char **str, int i, char *temp)
+static void	ft_lkmala_lkmala(char **str, int i)
 {
-	if (!str || !*str)
-		return ;
+	char	*temp;
+
+	temp = NULL;
 	if ((*str)[i])
 	{
 		temp = ft_strdup(&((*str)[i]));
@@ -86,7 +90,6 @@ char	*ft_lkmala(char **str)
 {
 	int		i;
 	char	*line;
-	char	*temp;
 
 	i = 0;
 	if (!*str)
@@ -103,7 +106,6 @@ char	*ft_lkmala(char **str)
 		return (NULL);
 	}
 	ft_strlcpy(line, *str, i + 1);
-	temp = NULL;
-	ft_lkmala_lkmala(&(*str), i, temp);
+	ft_lkmala_lkmala(&(*str), i);
 	return (line);
 }

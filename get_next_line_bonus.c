@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aahaded <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 10:49:23 by aahaded           #+#    #+#             */
-/*   Updated: 2024/11/15 10:49:26 by aahaded          ###   ########.fr       */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+    +:+     */
+/*   By: aahaded <marvin@42.fr>                     +#+  +:+
+    +#+        */
+/*                                                +#+#+#+#+#+
+    +#+           */
+/*   Created: 2024/11/12 13:34:09 by aahaded           #+#    #+#             */
+/*   Updated: 2024/11/12 18:37:17 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
 
-char	*ft_strchar(char *str, char c)
+static char	*ft_strchar(char *str, char c)
 {
 	int	i;
 
 	i = 0;
 	if (!str)
 		return (NULL);
-	while (str && str[i])
+	while (str[i])
 	{
 		if (str[i] == c)
 			return (str + i);
@@ -42,7 +45,7 @@ static void	ft_lkmala_strjoin(char *res, char *str, int *len)
 	}
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+static char	*ft_strjoin(char *s1, char *s2)
 {
 	int		len;
 	char	*res;
@@ -92,7 +95,7 @@ static char	*ft_read_to_saved(int fd, char *saved)
 
 char	*get_next_line(int fd)
 {
-	static char	*saved[1024] = {NULL};
+	static char	*saved[1024] = {0};
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (free(saved[fd]), NULL);
@@ -101,19 +104,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (ft_lkmala(&saved[fd]));
 }
-
-// int	main(void)
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-
-// 	char *line;
-
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// }

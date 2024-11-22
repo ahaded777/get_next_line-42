@@ -14,14 +14,14 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-char	*ft_strchar(char *str, char c)
+static char	*ft_strchar(char *str, char c)
 {
 	int	i;
 
 	i = 0;
 	if (!str)
 		return (NULL);
-	while (str && str[i])
+	while (str[i])
 	{
 		if (str[i] == c)
 			return (str + i);
@@ -45,7 +45,7 @@ static void	ft_lkmala_strjoin(char *res, char *str, int *len)
 	}
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+static char	*ft_strjoin(char *s1, char *s2)
 {
 	int		len;
 	char	*res;
@@ -104,17 +104,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (ft_lkmala(&saved));
 }
-
-// int	main(void)
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-// 	char *line;
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// }
