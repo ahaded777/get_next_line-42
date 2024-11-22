@@ -97,7 +97,9 @@ char	*get_next_line(int fd)
 {
 	static char	*saved[1024] = {0};
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 1024)
+		return (NULL);
+	if (BUFFER_SIZE <= 0)
 		return (free(saved[fd]), NULL);
 	saved[fd] = ft_read_to_saved(fd, saved[fd]);
 	if (!saved[fd])
